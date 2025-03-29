@@ -1,7 +1,7 @@
-package scraper
+package main
 
 import "fmt"
 
-func Main() {
+func main() {
 	fmt.Println("Scraper started")
 }
