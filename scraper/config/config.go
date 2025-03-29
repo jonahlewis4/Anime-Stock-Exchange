@@ -7,13 +7,13 @@ import (
 )
 
 type config struct {
-	On                 bool          `json:"On"`                 //on indicates if the scraper is on or not
-	TimeBetweenScrapes time.Duration `json:"TimeBetweenScrapes"` //if the scraper is on, it will scrape every interval
+	On                     bool          `json:"On"`                   //on indicates if the scraper is on or not
+	MillisBetweenScrapesMs time.Duration `json:"MillisBetweenScrapes"` //if the scraper is on, it will scrape every interval
 }
 
 var _config = config{
-	On:                 false,
-	TimeBetweenScrapes: time.Hour * 24,
+	On:                     false,
+	MillisBetweenScrapesMs: time.Hour * 24,
 }
 
 func HandleConfig(w http.ResponseWriter, r *http.Request) {
@@ -26,8 +26,11 @@ func HandleConfig(w http.ResponseWriter, r *http.Request) {
 
 func HandleGetConfig(w http.ResponseWriter, r *http.Request) {
 	//encode the structure to json
+
+	w.Header().Set("Content-Type", "application/json")
 	encoder := json.NewEncoder(w)
-	err := encoder.Encode(w)
+	err := encoder.Encode(&_config)
+
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
