@@ -11,7 +11,10 @@ type config struct {
 	TimeBetweenScrapes time.Duration `json:"TimeBetweenScrapes"` //if the scraper is on, it will scrape every interval
 }
 
-var _config = config{}
+var _config = config{
+	On:                 false,
+	TimeBetweenScrapes: time.Hour * 24,
+}
 
 func HandleConfig(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "GET" {

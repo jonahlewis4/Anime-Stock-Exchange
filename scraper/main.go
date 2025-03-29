@@ -10,7 +10,7 @@ func main() {
 	fmt.Println("Scraper started")
 
 	mux := http.NewServeMux()
-
+	
 	mux.HandleFunc("/config", config.HandleConfig)
 
 }
