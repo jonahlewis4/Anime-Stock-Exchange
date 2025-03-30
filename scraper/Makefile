@@ -17,6 +17,10 @@ run-debug:
 	echo "Running with remote dubber port"
 	docker compose -f docker-compose.debug.yaml up --build -d
 	echo "If build succeeded, you can connect and debug remotely over port. Don't forget to stop the container with make stop-debug"
+run-debug-no-detach:
+	echo "Running with remote dubber port"
+	docker compose -f docker-compose.debug.yaml up --build
+	echo "If build succeeded, you can connect and debug remotely over port. Don't forget to stop the container with make stop-debug"
 stop-debug:
 	echo "Stopping debug environment"
 	docker compose -f docker-compose.debug.yaml down
