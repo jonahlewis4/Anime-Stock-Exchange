@@ -5,30 +5,30 @@ import (
 	"net/http"
 )
 
-func HandleConfig(w http.ResponseWriter, r *http.Request) {
+func (c *Config) Handle(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "GET" {
-		HandleGetConfig(w, r)
+		c.HandleGet(w, r)
 	} else if r.Method == "POST" {
-		HandleSetConfig(w, r)
+		c.HandleSet(w, r)
 	}
 }
 
-func HandleGetConfig(w http.ResponseWriter, r *http.Request) {
+func (c *Config) HandleGet(w http.ResponseWriter, r *http.Request) {
 	//encode the structure to json
 
 	w.Header().Set("Content-Type", "application/json")
 	encoder := json.NewEncoder(w)
-	err := encoder.Encode(&_config)
+	err := encoder.Encode(c)
 
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 }
-func HandleSetConfig(w http.ResponseWriter, r *http.Request) {
+func (c *Config) HandleSet(w http.ResponseWriter, r *http.Request) {
 	//decode the passed json
 	decoder := json.NewDecoder(r.Body)
 	//TODO make this thread safe
-	err := decoder.Decode(&_config)
+	err := decoder.Decode(c)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return

@@ -14,5 +14,5 @@ type Scraper struct {
 func (s *Scraper) Init() {
 	fmt.Println("Scraper starting")
 
-	s.server.Init()
+	s.server.Init(&s.config)
 }

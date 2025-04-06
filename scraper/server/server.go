@@ -8,10 +8,10 @@ import (
 
 type Restserver struct{}
 
-func (server *Restserver) Init() {
+func (server *Restserver) Init(config *config.Config) {
 	mux := http.NewServeMux()
 
-	mux.HandleFunc("/config", config.HandleConfig)
+	mux.HandleFunc("/config", config.Handle)
 	err := http.ListenAndServe(":8080", mux)
 	if err != nil {
 		fmt.Println(err)

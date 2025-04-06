@@ -9,7 +9,10 @@ type Config struct {
 	MillisBetweenScrapes time.Duration `json:"MillisBetweenScrapes"` //if the scraper is on, it will scrape every interval
 }
 
-var _config = Config{
-	On:                   false,
-	MillisBetweenScrapes: time.Hour * 24,
+func (c *Config) Init() {
+	//TODO get from a dabatase
+	*c = Config{
+		On:                   false,
+		MillisBetweenScrapes: time.Hour * 24,
+	}
 }
