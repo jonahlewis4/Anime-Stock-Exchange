@@ -3,8 +3,8 @@ FROM golang:latest AS build-debug
 WORKDIR /app/
 
 # Copy the Go module files
-COPY go.mod .
-COPY go.sum .
+COPY ../go.mod .
+COPY ../go.sum .
 
 # Download the Go module dependencies
 RUN go mod download
@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install -y \
     && go install github.com/go-delve/delve/cmd/dlv@latest
 
 
-COPY . .
+COPY .. .
 
 RUN CGO_ENABLED=0 GOOS=linux go build -o /app/scraper .
 
@@ -34,12 +34,12 @@ FROM golang:latest AS build
 WORKDIR /app/
 
 # Copy the Go module files
-COPY go.mod .
-COPY go.sum .
+COPY ../go.mod .
+COPY ../go.sum .
 
 # Download the Go module dependencies
 RUN go mod download
-COPY . .
+COPY .. .
 
 RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-s -w" -o /app/scraper .
 

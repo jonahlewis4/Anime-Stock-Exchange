@@ -1,7 +1,8 @@
 services:
   scraper:
     build:
-      context: .
+      context: ../
+      dockerfile: buildfiles/Dockerfile
       target: debug
     ports:
       - "8080:8080"
