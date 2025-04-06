@@ -1,30 +1,11 @@
 package main
 
 import (
-	"fmt"
-	"github.com/jonahlewis4/Anime-Stock-Exchange/scraper/config"
-	"github.com/jonahlewis4/Anime-Stock-Exchange/scraper/server"
-	"net/http"
+	"github.com/jonahlewis4/Anime-Stock-Exchange/scraper/scraper"
 )
 
-type scraper struct {
-	config config.Config
-	server server.Restserver
-}
-
 func main() {
-	fmt.Println("Scraper started")
 
-	mux := http.NewServeMux()
-
-	mux.HandleFunc("/config", config.HandleConfig)
-	err := http.ListenAndServe(":8080", mux)
-	if err != nil {
-		fmt.Println(err)
-	}
-
-}
-func (s *scraper) init() {
-
-	s.server.Init()
+	s := scraper.Scraper{}
+	s.Init()
 }

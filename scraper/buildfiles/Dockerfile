@@ -16,14 +16,14 @@ RUN apt-get update && apt-get install -y \
 
 COPY .. .
 
-RUN CGO_ENABLED=0 GOOS=linux go build -o /app/scraper .
+RUN CGO_ENABLED=0 GOOS=linux go build -o /app/main .
 
 FROM golang AS debug
 WORKDIR /app/
 
 
 
-COPY --from=build-debug /app/scraper /app/scraper
+COPY --from=build-debug /app/main /app/scraper
 COPY --from=build-debug /go/bin/dlv /dlv
 CMD ["/dlv", "exec", "/app/scraper", "--headless", "--listen=:2345", "--api-version=2", "--accept-multiclient"]
 
@@ -41,12 +41,12 @@ COPY ../go.sum .
 RUN go mod download
 COPY .. .
 
-RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-s -w" -o /app/scraper .
+RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-s -w" -o /app/main .
 
 FROM scratch AS prod
 
 # Copy the application executable from the build image
-COPY --from=build /app/scraper /scraper
+COPY --from=build /app/main /scraper
 
 EXPOSE 8080
 CMD ["/scraper"]
