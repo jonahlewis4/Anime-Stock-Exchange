@@ -1,20 +1,14 @@
-package main
+package server
 
 import (
 	"fmt"
 	"github.com/jonahlewis4/Anime-Stock-Exchange/scraper/config"
-	"github.com/jonahlewis4/Anime-Stock-Exchange/scraper/server"
 	"net/http"
 )
 
-type scraper struct {
-	config config.Config
-	server server.Restserver
-}
+type Restserver struct{}
 
-func main() {
-	fmt.Println("Scraper started")
-
+func (server *Restserver) Init() {
 	mux := http.NewServeMux()
 
 	mux.HandleFunc("/config", config.HandleConfig)
@@ -22,9 +16,4 @@ func main() {
 	if err != nil {
 		fmt.Println(err)
 	}
-
-}
-func (s *scraper) init() {
-
-	s.server.Init()
 }
