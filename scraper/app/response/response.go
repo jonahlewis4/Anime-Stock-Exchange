@@ -1,6 +1,6 @@
 package response
 
-type response struct {
+type Response struct {
 	ID         int64  `json:"id"`
 	AnimeID    int64  `json:"anime_id"`
 	AnimeArt   string `json:"anime_image"`
