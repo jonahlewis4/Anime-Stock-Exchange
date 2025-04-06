@@ -1,11 +1,11 @@
 package main
 
 import (
-	"github.com/jonahlewis4/Anime-Stock-Exchange/scraper/scraper"
+	"github.com/jonahlewis4/Anime-Stock-Exchange/scraper/app"
 )
 
 func main() {
 
-	s := scraper.Scraper{}
+	s := app.Scraper{}
 	s.Init()
 }
