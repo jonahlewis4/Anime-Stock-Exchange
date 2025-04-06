@@ -24,3 +24,5 @@ run-debug-no-detach:
 stop-debug:
 	echo "Stopping debug environment"
 	docker compose -f buildfiles/docker-compose.debug.yaml down
+
+#TODO add an air auto reload build
