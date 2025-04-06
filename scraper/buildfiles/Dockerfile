@@ -43,7 +43,7 @@ COPY .. .
 
 RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-s -w" -o /app/main .
 
-FROM scratch AS prod
+FROM gcr.io/distroless/base AS prod
 
 # Copy the application executable from the build image
 COPY --from=build /app/main /scraper
