@@ -1,5 +1,10 @@
-#TODO spin up test in such a way that it waits for the main db to get up.
 services:
   app:
+    build:
+      context: ../
+      dockerfile: db/Dockerfile
+      target: tester
     depends_on:
       - mysql
+    environment:
+      DB_URL: mysql

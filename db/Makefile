@@ -1,8 +1,5 @@
 
 db-up:
 	docker compose -f db-up.docker-compose.yaml up --build
-
-test:
-	docker compose -f db-test.docker-compose.yaml up --build
-
-up-and-test:
+db-up-test:
+	docker compose -f db-up.docker-compose.yaml -f db-up-test.docker-compose.yaml up --build

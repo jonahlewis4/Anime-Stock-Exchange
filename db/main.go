@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
+	"os"
 )
 
 type Id struct {
@@ -15,9 +16,12 @@ func (id *Id) TableName() string {
 }
 
 func main() {
+
+	dbUrl := getDbUrl()
+
 	fmt.Println("Testing database")
 
-	dsn := "root:password@tcp(localhost:3306)/test?charset=utf8mb4&parseTime=True&loc=Local"
+	dsn := "root:password@tcp(" + dbUrl + ":3306)/test?charset=utf8mb4&parseTime=True&loc=Local"
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
 		panic("failed to connect database")
@@ -55,4 +59,11 @@ func main() {
 		panic(fmt.Errorf("error deleting test table: %s", deleteTableError))
 	}
 
+}
+
+func getDbUrl() string {
+	if os.Getenv("DB_URL") == "" {
+		return "localhost"
+	}
+	return os.Getenv("DB_URL")
 }
