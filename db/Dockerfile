@@ -4,9 +4,10 @@ WORKDIR /app
 
 COPY ../go.mod ../go.sum ./
 
+COPY ./db .
+
 RUN go mod tidy
 
 #TODO ignore buildfiles
-COPY ./db .
 
 CMD ["go", "run", "main.go"]

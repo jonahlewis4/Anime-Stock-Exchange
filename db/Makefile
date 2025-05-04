@@ -3,6 +3,6 @@ db-up:
 	docker compose -f db-up.docker-compose.yaml up --build
 
 test:
-	go run main.go
+	docker compose -f db-test.docker-compose.yaml up --build
 
 up-and-test:
